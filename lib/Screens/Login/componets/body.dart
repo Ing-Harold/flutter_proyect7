@@ -3,6 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_proyect7/Screens/Login/componets/background_login.dart';
 import 'package:flutter_proyect7/contains.dart';
 import 'package:flutter_proyect7/widgets/widgets.dart';
+import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:convert';
 
 class Body extends StatelessWidget {
   const Body({
@@ -11,6 +14,39 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController userEmail = new TextEditingController();
+    TextEditingController userPassword = new TextEditingController();
+
+    Future login(BuildContext cont) async {
+      if (userEmail == "" || userPassword == "") {
+        Fluttertoast.showToast(
+          msg: "Usuario o contraseña incoreccta",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          fontSize: 16.0,
+        );
+      } else {
+        var url = Uri.parse("http://localhost/flutter_proyect7/UsersLogin.php");
+
+        var response = await http.post(url, body: {
+          "userEmail": userEmail.text,
+          "userPassword": userPassword.text,
+        });
+
+        var data = json.decode(response.body);
+        if (data == "sucess") {
+          Navigator.pushNamed(cont, "menu");
+        } else {
+          Fluttertoast.showToast(
+            msg: "Usuario o contraseña incoreccta",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            fontSize: 16.0,
+          );
+        }
+      }
+    }
+
     Size size = MediaQuery.of(context).size;
     //llame al modelo de mi fondo donde tengo las imagenes
     return Background_login(
@@ -35,10 +71,10 @@ class Body extends StatelessWidget {
             loginInputField(
               hintText: "Tu email",
               icon: Icons.person,
-              onChanged: (value) {},
+              controller: userEmail,
             ),
             PasswordField(
-              onChanged: (value) {},
+              controller: userPassword,
             ),
             // de nuevo aca el botonazo por que no me slaio el modelo del boton
             Container(
@@ -51,7 +87,7 @@ class Body extends StatelessWidget {
                           EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                       color: Color(0xFF6F35A5), //kPrimaryColor,
                       onPressed: () {
-                        Navigator.pushNamed(context, "login");
+                        login(context);
                       },
                       child: Text(
                         "LOGIN",

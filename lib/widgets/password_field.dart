@@ -3,10 +3,10 @@ import 'package:flutter_proyect7/contains.dart';
 import 'package:flutter_proyect7/widgets/widgets.dart';
 
 class PasswordField extends StatelessWidget {
-  final ValueChanged<String> onChanged;
+  final TextEditingController controller;
   const PasswordField({
     Key? key,
-    required this.onChanged,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class PasswordField extends StatelessWidget {
     return TextFieldContainer(
       child: TextField(
         obscureText: true,
-        onChanged: onChanged,
+        controller: controller,
         decoration: InputDecoration(
           hintText: "Password",
           icon: Icon(

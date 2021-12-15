@@ -10,6 +10,8 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController controllerUserEmail = new TextEditingController();
+    TextEditingController controllerUsersPass = new TextEditingController();
     Size size = MediaQuery.of(context).size;
     return BackgroundSingUp(
       child: SingleChildScrollView(
@@ -33,10 +35,10 @@ class Body extends StatelessWidget {
             loginInputField(
               hintText: "Tu email",
               icon: Icons.person,
-              onChanged: (value) {},
+              controller: controllerUserEmail,
             ),
             PasswordField(
-              onChanged: (value) {},
+              controller: controllerUsersPass,
             ),
             // de nuevo aca el botonazo por que no me slaio el modelo del boton
             Container(
