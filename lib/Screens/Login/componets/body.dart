@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_proyect7/Screens/Login/componets/background_login.dart';
 import 'package:flutter_proyect7/contains.dart';
 import 'package:flutter_proyect7/widgets/widgets.dart';
+import 'dart:convert' as convert;
+
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
@@ -26,8 +28,9 @@ class Body extends StatelessWidget {
           fontSize: 16.0,
         );
       } else {
-        var url = Uri.parse("http://localhost/flutter_proyect7/UsersLogin.php");
-
+        // var url = Uri.parse("http://localhost/flutter_proyect7/UsersLogin.php");
+        var url = Uri.https('localhost', 'flutter_proyect7/getUsers.php');
+        // var url = 'http://localhost/flutter_proyect7/UsersLogin.php';
         var response = await http.post(url, body: {
           "userEmail": userEmail.text,
           "userPassword": userPassword.text,
@@ -87,7 +90,7 @@ class Body extends StatelessWidget {
                           EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                       color: Color(0xFF6F35A5), //kPrimaryColor,
                       onPressed: () {
-                        login(context);
+                        Navigator.pushNamed(context, "home");
                       },
                       child: Text(
                         "LOGIN",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proyect7/Screens/screens.dart';
 import 'package:flutter_proyect7/contains.dart';
+import 'package:flutter_proyect7/page/profile_page.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -21,7 +22,9 @@ class MyApp extends StatelessWidget {
         'welcome': (_) => WelcomeScreen(),
         'login': (_) => LoginScreen(),
         'signup': (_) => SignUpScreen(),
-        'menu': (_) => MenuScreen(),
+        'home': (_) => HomeScreen(),
+        'profile': (_) => ProfileScreen(),
+        'account': (_) => ProfilePage(),
       },
       theme: ThemeData(
         primaryColor: kPrimaryColor,
