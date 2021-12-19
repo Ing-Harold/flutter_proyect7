@@ -36,7 +36,7 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
-            press: () {},
+            press: () => Navigator.pushNamed(context, "welcome"),
           ),
         ],
       ),
